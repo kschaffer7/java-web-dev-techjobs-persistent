@@ -1,11 +1,12 @@
 package org.launchcode.javawebdevtechjobspersistent.models.data;
 
-// Should extend CrudRepository
-// Should be annotated with @Repository
-
+import org.launchcode.javawebdevtechjobspersistent.models.Skill;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+// Should extend CrudRepository
+// Should be annotated with @Repository
+
 @Repository
-public interface SkillRepository extends CrudRepository {
+public interface SkillRepository extends CrudRepository<Skill, Integer> {
 }
