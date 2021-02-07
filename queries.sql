@@ -7,5 +7,7 @@
 ## SELECT * FROM techjobs.employer WHERE location = "St. Louis City";
 
 ## Part 3: Test it with SQL
+## write the SQL statement to remove the job table
+DROP TABLE job;
 
 ## Part 4: Test it with SQL
