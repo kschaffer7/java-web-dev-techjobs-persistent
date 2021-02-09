@@ -19,6 +19,13 @@ public class EmployerController {
     // Give this field an @Autowired annotation.
     @Autowired
     private EmployerRepository employerRepository;
+    // Mapping added to redirect to /employers after adding a new employer
+    @GetMapping("")
+    public String listEmployers(Model model) {
+        model.addAttribute("employers", employerRepository.findAll());
+
+        return "employers/index";
+    }
 
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {

@@ -15,19 +15,25 @@ import java.util.Optional;
 @RequestMapping("skills")
 public class SkillController {
 
-    //Add a private field of EmployerRepository type called employerRepository to EmployerController.
+    //Add a private field of SkillRepository type called skillRepository to SkillController.
     // Give this field an @Autowired annotation.
     @Autowired
     private SkillRepository skillRepository;
+
+    // Mapping added to redirect to /skills after adding a new skill
+    @GetMapping("")
+    public String listSkills(Model model) {
+        model.addAttribute("skills", skillRepository.findAll());
+
+        return "skills/index";
+    }
 
     @GetMapping("add")
     public String displayAddSkillForm(Model model) {
         model.addAttribute(new Skill());
         return "skills/add";
     }
-    //processAddEmployerForm already takes care of sending the form back if any of the submitted employer object information is invalid.
-    // However, it does not yet contain the code to save a valid object.
-    // Use employerRepository and the appropriate method to do so.
+
     @PostMapping("add")
     public String processAddSkillForm(@ModelAttribute @Valid Skill newSkill,
                                       Errors errors, Model model) {
@@ -38,14 +44,10 @@ public class SkillController {
         skillRepository.save(newSkill); //ks added to save new employers
         return "redirect:";
     }
-    // displayViewEmployer will be in charge of rendering a page to view the contents of an individual employer object.
-    // It will make use of that employer object’s id field to grab the correct information from employerRepository.
-    // optEmployer is currently initialized to null.
-    // Replace this using the .findById() method with the right argument to look for the given employer object from the data layer.
+
     @GetMapping("view/{skillID}")
     public String displayViewSkill(Model model, @PathVariable int skillId) {
 
-        //Optional optEmployer = null; KS Replaced by following line
         Optional optionalSkill = skillRepository.findById(skillId);
         if (optionalSkill.isPresent()) {
             Skill skill = (Skill) optionalSkill.get();
