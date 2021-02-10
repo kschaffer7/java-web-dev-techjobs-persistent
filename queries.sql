@@ -11,3 +11,8 @@
 DROP TABLE job;
 
 ## Part 4: Test it with SQL
+##  write a query to return a list of the names and descriptions of all skills that are attached to jobs in alphabetical order.
+## If a skill does not have a job listed, it should not be included in the results of this query.
+## You will need to make use of “is not null”.
+## I did not make use of “is not null”, but believe the INNER JOIN of the skill ID still allows for the skills to only be joined to a listed job.
+SELECT id, name, description FROM techjobs.skill INNER JOIN techjobs.job_skills ON techjobs.skill.id = techjobs.job_skills.skills_id ORDER BY techjobs.skill.name ASC;
